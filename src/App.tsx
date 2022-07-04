@@ -1,31 +1,24 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import React from 'react';
-import AppBar from './Navigation';
 import Landing from './Landing';
-import { Button } from '@mui/material';
-import Signup from './Signup';
+import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
+import Dashboard from './Dashboard';
+import Content from './Content';
 
 function App() {
-  const Auth0 = useAuth0(); 
-  const { logout } = useAuth0(); 
-  const isRegistered = false; 
 
-  // GET Request to check if the user is registered or not
+  const Auth0 = useAuth0();
 
   return (
     <>
-      {Auth0.isAuthenticated ? 
-        <>
-          
-          {!isRegistered ? <> <Signup/> </> : 
-            <>
-              <Button variant="contained" onClick={() => logout() }> Logout </Button> 
-            </>
-          }
-          
-        </> 
+      { Auth0.isAuthenticated ? 
+        <Router>
+          <Routes>
+            <Route path="/" element={<Content/>} />
+            <Route path="/Dashboard" element={<Dashboard />} />
+          </Routes>
+        </Router> 
         : 
-          <Landing/> 
+        <Landing/> 
       }
     </>
   );
