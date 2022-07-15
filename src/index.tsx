@@ -10,16 +10,14 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-      <Auth0Provider
-        domain={AuthConfig.AUTH0_DOMAIN}
-        clientId={AuthConfig.AUTH0_CLIENT_ID}
-        audience={AuthConfig.AUTH0_AUDIENCE}
-        redirectUri={window.location.origin}
-        >
-      <SnackbarProvider maxSnack={3}>
-        <App />
-      </SnackbarProvider>
-      </Auth0Provider>
-  </React.StrictMode>
+    <Auth0Provider
+      domain={AuthConfig.AUTH0_DOMAIN}
+      clientId={AuthConfig.AUTH0_CLIENT_ID}
+      audience={AuthConfig.AUTH0_AUDIENCE}
+      redirectUri={window.location.origin}
+      >
+    <SnackbarProvider maxSnack={3}>
+      <App />
+    </SnackbarProvider>
+    </Auth0Provider>
 );

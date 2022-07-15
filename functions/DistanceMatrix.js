@@ -12,11 +12,12 @@ exports.handler = (event, context, callback) => {
     distance.matrix(origins, destinations, function (err, distances) {
       if (!err)
       filterlist = []
+
       results = distances.rows[0].elements;
       for (let i = 0; i < results.length; i++){
         resultList[i].value = results[i].distance.value
       }
-      const LessthanRadius = resultList.filter((x, i) => x.value < RadiusList[i])
+      const LessthanRadius = resultList.filter((x, i) => x.value < (RadiusList[i]* 1600))
       callback(null, {
         statusCode: 200,
         body: JSON.stringify(LessthanRadius)

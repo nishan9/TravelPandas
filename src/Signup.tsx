@@ -7,7 +7,7 @@ import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useEffect, useState } from 'react';
-import { Alert, Checkbox, FormControl, FormControlLabel, FormGroup, InputLabel, MenuItem, Select, SelectChangeEvent, Slider, Snackbar, TextField } from '@mui/material';
+import { Checkbox, FormControl, FormControlLabel, FormGroup, InputLabel, MenuItem, Select, SelectChangeEvent, Slider, Snackbar, TextField } from '@mui/material';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -59,7 +59,7 @@ export default function Signup() {
         "isDriver": false,
         "address" : Address, 
         "radius": data.radius,
-        "days": "MTWTF",
+        "days": alldays,
         "outboundTime": data.start,
         "inboundTime": data.end,
         "capacity" : data.capacity
