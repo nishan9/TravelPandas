@@ -12,6 +12,7 @@ function Bookings() {
   const [booking, setBooking] = useState(); 
   const [driver, setDriver] = useState<User>(); 
   const [disableDays, setDisableDays] = useState<string>(); 
+  const [bookedDates, setBookedDates] = useState<string[]>(); 
 
     useEffect(() => {
         getData(); 
@@ -26,9 +27,12 @@ function Bookings() {
     })
     const data = await Possible.json();
     
+    
     setDriver(data.driver);
     setBooking(data.booking); 
     setDisableDays(data.driver.days); 
+    setBookedDates(data.fullyBooked); 
+
   }
 
   function disableDates(calendar : any){
@@ -71,8 +75,22 @@ function Bookings() {
       }
     }
 
-   //if (calendar.date.getDate() === 21 && new Date("1 July").getMonth() == calendar.date.getMonth())
-   //  return true; 
+
+  
+  for (let i=0; i < bookedDates!.length ; i++){
+    const dateComponents = bookedDates![i].split("-");
+    const withoutLeading0 = parseInt(dateComponents[2], 10);
+    dateComponents[2] = withoutLeading0.toString()
+    const withoutLeading00 = parseInt(dateComponents[1], 10);
+    dateComponents[1] = withoutLeading00.toString()
+
+    if (calendar.date.getDate() === parseInt(dateComponents[2]) && calendar.date.getMonth() === parseInt(dateComponents[1])){
+      return true
+    }
+  }
+
+  
+
     
    if(days.includes(calendar.date.getDay()))
       return calendar.date.getDay() === calendar.date.getDay();
@@ -85,8 +103,8 @@ function Bookings() {
 
     <div style={{padding : 50 }}>
         <Calendar
-            minDate={new Date()}
-            maxDate={Monthlater}
+            //minDate={new Date()}
+            //maxDate={Monthlater}
             prev2Label={null}
             next2Label={null}
             //@ts-ignore
