@@ -68,7 +68,7 @@ function Dashboard() {
 
   async function getData(DriverAddressList : AddressRadius){
     const PassengerAddress = "81 OAKRIDGE ROAD, HIGH WYCOMBE, BUCKINGHAMSHIRE, HP11 2PL"; 
-    const Possible = await fetch(`/api/DistanceMatrix`, { 
+    const Possible = await fetch(`https://indigo-crocodile-2910.twil.io/map`, { 
       method:"POST", 
       headers: {
           "Content-Type": "application/json",
@@ -119,9 +119,6 @@ function Dashboard() {
 
           </Box>
         </AppBar>
-
-
-
         
         <Divider/>
 

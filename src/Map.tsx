@@ -13,7 +13,6 @@ const center = {
   lng: -0.7682829999999999
 };
 
-
 Geocode.setApiKey("AIzaSyCMBNvgbXl1QfSS2JNnDx5MPwbZouyBbJw");
 
 interface MapProps{

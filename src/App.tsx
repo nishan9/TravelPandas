@@ -8,6 +8,7 @@ import Bookings from './Bookings';
 function App() {
 
   const Auth0 = useAuth0();
+  console.log(Auth0.isAuthenticated)
 
   return (
     <>
@@ -20,7 +21,7 @@ function App() {
           </Routes>
         </Router> 
         : 
-        <Landing/>
+        <Landing/> 
       }
     </>
   );

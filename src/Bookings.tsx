@@ -3,6 +3,11 @@ import { useParams } from 'react-router-dom';
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
 import User from './model/User';
+import parse from 'date-fns/parse';
+import format from 'date-fns/format';
+import MakeBooking from './MakeBooking';
+import Grid from '@mui/material/Grid';
+import "./Calendar.css"
 
 function Bookings() {
 
@@ -13,10 +18,11 @@ function Bookings() {
   const [driver, setDriver] = useState<User>(); 
   const [disableDays, setDisableDays] = useState<string>(); 
   const [bookedDates, setBookedDates] = useState<string[]>(); 
+  const [selectDate, setSelectedDate] = useState<string>(""); 
 
     useEffect(() => {
         getData(); 
-    }, [])
+    }, [selectDate])
 
   async function getData(){
     const Possible = await fetch(`${process.env.REACT_APP_API_URL}/Bookings/${params.id}`, { 
@@ -32,7 +38,6 @@ function Bookings() {
     setBooking(data.booking); 
     setDisableDays(data.driver.days); 
     setBookedDates(data.fullyBooked); 
-
   }
 
   function disableDates(calendar : any){
@@ -76,7 +81,6 @@ function Bookings() {
     }
 
 
-  
   for (let i=0; i < bookedDates!.length ; i++){
     const dateComponents = bookedDates![i].split("-");
     const withoutLeading0 = parseInt(dateComponents[2], 10);
@@ -88,9 +92,6 @@ function Bookings() {
       return true
     }
   }
-
-  
-
     
    if(days.includes(calendar.date.getDay()))
       return calendar.date.getDay() === calendar.date.getDay();
@@ -98,21 +99,29 @@ function Bookings() {
 
   }
   
+  function Book(value : Date){
+    const date = format(value, 'yyyy-MM-dd')
+    setSelectedDate(date)
+  }
 
   return (
-
-    <div style={{padding : 50 }}>
+    <Grid spacing={3} container xs={12} m={2} >
+      <Grid item lg={4}>
         <Calendar
             //minDate={new Date()}
             //maxDate={Monthlater}
+            onClickDay={(value : Date) => Book(value)}
             prev2Label={null}
             next2Label={null}
             //@ts-ignore
             tileDisabled={disableDates}
-            view={"month"}
-         />
-    </div>
-
+            view={"month"}          
+        />
+      </Grid>
+      <Grid item lg={8}>
+        gfgf
+      </Grid>
+    </Grid>
   )
 }
 
