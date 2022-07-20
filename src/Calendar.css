@@ -8,10 +8,70 @@
     box-shadow: 0 2px 5px red;
 }
 
+span {
+    font-size: large;
+}
+
+.date p {
+    background: red;
+    border-radius: 50%;
+}
+
+.circle-blue {
+    width: 32px;
+    height: 32px;  
+    line-height: 30px;
+    font-size: 17px;
+    border-radius: 50%;
+    color: white ; 
+    text-align: center;
+    background: #2979ff; 
+  }
+  .circle-red {
+    width: 30px;
+    height: 30px;  
+    line-height: 30px;
+    font-size: 17px;
+    border-radius: 50%;
+    color: white ; 
+    text-align: center;
+    background: red; 
+  }
+
+  .circle-white {
+    width: 30px;
+    height: 30px;  
+    line-height: 30px;
+    font-size: 17px;
+    border-radius: 50%;
+    color: black ; 
+    border: 0.1px solid grey;
+    text-align: center;
+    background: white; 
+  }
 
 .react-calendar {
     border-style: none;
-    font-family: 'Poppins'
+    font-family: 'Poppins';
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(1.9px);
+    -webkit-backdrop-filter: blur(1.9px);
+    width: 450px;
+    height : 500px; 
+    padding : 40px;
+}
+
+.key {
+    margin-top : 30px; 
+    width : 450px; 
+    padding : 20px; 
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(1.9px);
+    -webkit-backdrop-filter: blur(1.9px);
 }
 
 .react-calendar__month-view__weekdays {
@@ -49,4 +109,14 @@ abbr {
 }
 .react-calendar__month-view__days__day--weekend {
     color : black; 
+}
+
+.driver-profile {
+    width: 100%;
+    padding: 4%;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(1.9px);
+    -webkit-backdrop-filter: blur(1.9px);
 }

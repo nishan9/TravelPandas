@@ -85,7 +85,6 @@ export default function AccountMenu() {
             <Logout fontSize="small" />
           </ListItemIcon>
           Logout
-
         </MenuItem>
       </Menu>
     </>

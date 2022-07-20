@@ -3,11 +3,15 @@ import { useParams } from 'react-router-dom';
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
 import User from './model/User';
-import parse from 'date-fns/parse';
 import format from 'date-fns/format';
 import MakeBooking from './MakeBooking';
 import Grid from '@mui/material/Grid';
 import "./Calendar.css"
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { Box } from '@mui/material';
+import CalendarKey from './components/CalendarKey';
+
 
 function Bookings() {
 
@@ -105,21 +109,35 @@ function Bookings() {
   }
 
   return (
-    <Grid spacing={3} container xs={12} m={2} >
-      <Grid item lg={4}>
+    <Grid spacing={3} container xs={12} mt={1}>
+      <Grid item lg={4} marginLeft={5} >
+        <Box>
         <Calendar
             //minDate={new Date()}
-            //maxDate={Monthlater}
+            maxDate={Monthlater}
             onClickDay={(value : Date) => Book(value)}
             prev2Label={null}
             next2Label={null}
+            prevLabel={<ArrowBackIosIcon/>}
+            nextLabel={<ArrowForwardIosIcon/>}
             //@ts-ignore
             tileDisabled={disableDates}
             view={"month"}          
         />
+        </Box>
+        
+        <CalendarKey/>
+
       </Grid>
-      <Grid item lg={8}>
-        gfgf
+      <Grid item lg={7}>
+        {driver !== undefined ? 
+          <>
+            <MakeBooking date={selectDate} driverName={driver.name} driver={driver?.auth0_Id} capacity={driver?.capacity} /> 
+          </>
+        : 
+          <>
+          </>
+        }
       </Grid>
     </Grid>
   )
