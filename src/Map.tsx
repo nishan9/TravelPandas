@@ -5,7 +5,7 @@ import Geocode from "react-geocode";
 
 const containerStyle = {
   width: '102%',
-  height: '89vh'
+  height: '92vh'
 };
 
 const center = {

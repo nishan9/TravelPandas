@@ -11,6 +11,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Box } from '@mui/material';
 import CalendarKey from './components/CalendarKey';
+import ResponsiveAppBar from './ResponsiveAppBar';
 
 
 function Bookings() {
@@ -109,6 +110,8 @@ function Bookings() {
   }
 
   return (
+    <>
+      <ResponsiveAppBar/> 
     <Grid spacing={3} container xs={12} mt={1}>
       <Grid item lg={4} marginLeft={5} >
         <Box>
@@ -140,6 +143,7 @@ function Bookings() {
         }
       </Grid>
     </Grid>
+    </>
   )
 }
 

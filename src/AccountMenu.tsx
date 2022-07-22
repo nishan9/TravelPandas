@@ -8,10 +8,9 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
-import { useAuth0 } from '@auth0/auth0-react';
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function AccountMenu() {
-
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -20,7 +19,7 @@ export default function AccountMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const { logout } = useAuth0(); 
+  const { logout } = useAuth0();
 
   return (
     <>
@@ -54,7 +53,7 @@ export default function AccountMenu() {
               width: 32,
               height: 32,
               ml: -0.5,
-              mr: 1
+              mr: 1,
             },
             "&:before": {
               content: '""',
@@ -66,9 +65,9 @@ export default function AccountMenu() {
               height: 10,
               bgcolor: "background.paper",
               transform: "translateY(-50%) rotate(45deg)",
-              zIndex: 0
-            }
-          }
+              zIndex: 0,
+            },
+          },
         }}
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
@@ -79,8 +78,7 @@ export default function AccountMenu() {
           </ListItemIcon>
           Profile
         </MenuItem>
-        <MenuItem onClick={() => logout() }>
-
+        <MenuItem onClick={() => logout()}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
@@ -90,5 +88,3 @@ export default function AccountMenu() {
     </>
   );
 }
-
-//    //        <Button variant="contained" > Logout </Button>

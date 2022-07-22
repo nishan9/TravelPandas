@@ -120,3 +120,11 @@ abbr {
     backdrop-filter: blur(1.9px);
     -webkit-backdrop-filter: blur(1.9px);
 }
+.screen{
+    position: relative;
+    }
+    .innerdiv {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    }

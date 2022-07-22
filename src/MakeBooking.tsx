@@ -70,7 +70,7 @@ function MakeBooking(props : MakeBookingProps) {
 
         if (res.ok){
             enqueueSnackbar("Congragulations! Your booking is confirmed", { variant: 'success' });
-            //navigate("Dashboard");
+            navigate(-1);
         }
 
     }
@@ -94,16 +94,36 @@ function MakeBooking(props : MakeBookingProps) {
 
         if (res.ok){
             enqueueSnackbar("Congragulations! Your booking is confirmed", { variant: 'success' });
-            //navigate("Dashboard");
+            navigate(-1);
         }
     }
 
     
   return (
+    <>
+    <div className="driver-profile">
+
+
+        <Typography>fdg</Typography>
+
+        <div style={{ textAlign : 'right', display : 'flex', justifyContent: 'flex-end'}}>
+            <Player
+                autoplay
+                loop
+                src={panda}
+                style={{ height: '200px' }}
+                >
+            </Player>
+        </div>
+
+
+    </div>
+
+    <br></br> 
     <div className="driver-profile">
          {booking !== undefined ? 
          <>
-            <Typography variant={'h4'}>Reserve for {format(new Date(props.date), 'EEEE do MMMM')} </Typography>
+            <Typography variant={'h6'}>Reserve for {format(new Date(props.date), 'EEEE do MMMM')} </Typography>
             <br/>
             <Typography>Driver Name: {props.driverName}</Typography>
             <Typography>Driver ID: {booking.driver_Id} </Typography>
@@ -193,8 +213,8 @@ function MakeBooking(props : MakeBookingProps) {
                 </Player>
             </>
             :
-            <>
-             Please select a date heheheheh
+            <div style={{ textAlign : 'center'}}>
+             <Typography variant={'h6'}>Please select a date you would like to carpool on</Typography>
              <Player
                 autoplay
                 loop
@@ -202,18 +222,16 @@ function MakeBooking(props : MakeBookingProps) {
                 style={{ height: '200px' }}
                 >
                 </Player>
-            </>
+            </div>
             }
 
        </>
        
        }
     </div>
+    </>
   )
 }
 
 export default MakeBooking
 
-function enqueueSnackbar(arg0: string, arg1: { variant: string; }) {
-    throw new Error('Function not implemented.');
-}
