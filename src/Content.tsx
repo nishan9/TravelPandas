@@ -6,6 +6,7 @@ import Loading from './Images/json/lf30_editor_eg0qzji7.json';
 import LoadingBubbles from './Images/json/97930-loading.json'; 
 import { Player, Controls } from '@lottiefiles/react-lottie-player';
 import Dashboard from './Dashboard';
+import Menu from './Menu';
 
 function Content() {
 
@@ -67,7 +68,7 @@ function Content() {
         </> 
         : 
         <>
-            <Dashboard/>
+            <Menu/>
         </>
         }
     </>

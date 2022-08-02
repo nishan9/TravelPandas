@@ -44,10 +44,26 @@ function Dashboard() {
   
 
   useEffect(() => {
-    fetchAddresses();
+    fetchMyaddress();
   }, [availableDays]);
 
-  async function fetchAddresses() {
+  async function fetchMyaddress() {
+    const token = await Auth0.getAccessTokenSilently();
+    const MyAddress = await fetch(`${process.env.REACT_APP_API_URL}/Bookings/MyAddress`, { 
+      method:"GET", 
+      headers: {
+          "Content-Type": "application/json",
+          "Authorization" : `Bearer ${token}`, 
+      }
+    })
+  
+    if (MyAddress.ok){
+      const result = await MyAddress.json()
+      fetchAddresses(result.myAddressResult)
+    }
+  }
+
+    async function fetchAddresses(myAddress : string) {
 
     var daystring = ""
     if (availableDays.Monday == true){
@@ -71,11 +87,14 @@ function Dashboard() {
     if (availableDays.Sunday == true){
       daystring = daystring + "Sun"; 
     }
+    
+    const token = await Auth0.getAccessTokenSilently();
 
-    const response = await fetch(`https://localhost:5001/Bookings/`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/Bookings/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization" : `Bearer ${token}`, 
       },
       body: JSON.stringify(daystring),
     });
@@ -85,22 +104,23 @@ function Dashboard() {
     if (data.length == 0) {
       setDistances([]);
     } else {
-      getData(data);
+      getData(data, myAddress);
     }
   }
 
-  async function getData(DriverAddressList: AddressRadius) {
-    const PassengerAddress = "81 OAKRIDGE ROAD, HIGH WYCOMBE, BUCKINGHAMSHIRE, HP11 2PL";
+  async function getData(DriverAddressList: AddressRadius, myAddress : string) {
+
     const Possible = await fetch(`https://indigo-crocodile-2910.twil.io/map`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        PassengerAddress: PassengerAddress,
+        PassengerAddress: myAddress,
         DriverAddressList: DriverAddressList,
       }),
     });
+    
     let result = await Possible.json(); 
     result = result.filter((e : any) => e.value !== 0); 
     setDistances(result); 

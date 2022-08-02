@@ -11,11 +11,12 @@ import Panda from "./Images/panda.jpg";
 import Money from './Images/salary.png'; 
 import Friends from './Images/laugh.png'; 
 import Emissions from './Images/traffic.png'; 
+import ResponsiveAppBarStart from './ResponsiveAppBarStart';
 
 function Landing() {
     return (
         <>
-            <AppBar/>
+            <ResponsiveAppBarStart/>
             <Grid container spacing={3} style={{ padding: '3% 15% 3% 15%' }}>
                 <Grid item xs={12} md={5} >
                     <Typography variant="h3" style={{ fontWeight: 'bold' }}>

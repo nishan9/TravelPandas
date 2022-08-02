@@ -14,6 +14,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { useNavigate } from "react-router-dom";
 import { useSnackbar } from 'notistack';
 import { Autocomplete } from "@mui/material";
+import Logout from "@mui/icons-material/Logout";
+import format from 'date-fns/format';
 
 export default function Signup() {
   const Auth0 = useAuth0();
@@ -27,6 +29,7 @@ export default function Signup() {
   const [Address, setAddress] = useState("")
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
+  const { logout } = useAuth0();
 
   useEffect(() => {
     Auth0.getAccessTokenSilently().then(token => setAccessToken(token));
@@ -37,10 +40,11 @@ export default function Signup() {
   }, [fromOptions]);
 
   async function SaveData(isDriver : boolean){
-    const start = data.start.toString()
-    const end = data.end.toString()
-    var alldays = ""
 
+    const start = data.start.toString()
+    const end =  data.end.toString()
+
+    var alldays = ""
 
     if (days.mon){ alldays += "Mon" } 
     if (days.tue){ alldays += "Tue" }
@@ -60,9 +64,10 @@ export default function Signup() {
         "address" : Address, 
         "radius": data.radius,
         "days": alldays,
-        "outboundTime": data.start,
-        "inboundTime": data.end,
-        "capacity" : data.capacity
+        "outboundTime": start,
+        "inboundTime": end,
+        "capacity" : data.capacity, 
+        "bookings" : []
       }
     );
 
@@ -71,7 +76,7 @@ export default function Signup() {
       postreq.isDriver = true; 
     }
 
-    const response = await fetch(`https://localhost:5001/Users`, { 
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/Users`, { 
       method:"POST", 
       body: JSON.stringify(postreq),
       headers: {
@@ -125,7 +130,6 @@ export default function Signup() {
   };
 
   const handleInputChange = async (e : any, v : any) => {
-
     const response = await fetch(
       `https://uk-address-and-postcodes.p.rapidapi.com/rapidapi/v1/autocomplete/addresses?query=${v}`,
       {
@@ -305,6 +309,11 @@ export default function Signup() {
               sx={{ mr: 1 }}
             >
               Back
+            </Button>
+            <Button
+              onClick={() => logout()}
+              >
+              Logout
             </Button>
             <Box sx={{ flex: '1 1 auto' }} />
             <Button onClick={handleNext}>
