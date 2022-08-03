@@ -16,6 +16,7 @@ import ResponsiveAppBar from "./ResponsiveAppBar";
 import { Player } from "@lottiefiles/react-lottie-player";
 import panda from './Images/json/panda.json'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Loading from './Images/json/lf30_editor_eg0qzji7.json'; 
 
 function Dashboard() {
 
@@ -197,14 +198,7 @@ function Dashboard() {
           </Stack> 
           { distances == undefined ?
             <>
-              <Typography>Loading</Typography>
-              <Player
-              autoplay
-              loop
-              src={panda}
-              style={{ height: '200px' }}
-              >
-              </Player>
+
             </>
           : distances.length == 0 ? 
             <div style={{ textAlign : 'center', paddingTop : '50px'}}>
@@ -244,18 +238,15 @@ function Dashboard() {
         <Grid item lg={8}>
         { distances !== undefined ?  <Map addressList={distances}/> :             
         <>
-              <Typography>Map Not Found</Typography>
               <Player
               autoplay
               loop
-              src={panda}
-              style={{ height: '200px' }}
+              src={Loading}
+              style={{ height: '700px' }}
               >
               </Player>
           </>
-          }
-       
-              
+          }              
         </Grid> 
       </Grid>
     </>

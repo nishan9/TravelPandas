@@ -169,7 +169,7 @@ function MakeBooking(props: MakeBookingProps) {
             <Typography variant={"h5"}>Travelling to University</Typography>
             <br />
             <Typography variant={"h4"}>
-              {format(new Date(props.outboundTime), "p")}
+              {props.outboundTime}
             </Typography>
           </div>
         </Grid>
@@ -178,7 +178,7 @@ function MakeBooking(props: MakeBookingProps) {
             <Typography variant={"h5"}>Travelling to Home</Typography>
             <br />
             <Typography variant={"h4"}>
-              {format(new Date(props.inboundTime), "p")}
+              {props.inboundTime}
             </Typography>
           </div>
         </Grid>
@@ -188,8 +188,7 @@ function MakeBooking(props: MakeBookingProps) {
       <div className="driver-profile">
         {props.date !== "" && booking !== undefined ? (
           <>
-                        <Typography variant={'h4'}>Reserve for {format(new Date(props.date), 'EEEE do MMMM')} </Typography>
-                      
+          <Typography variant={'h4'}>Reserve for {format(new Date(props.date), 'EEEE do MMMM')} </Typography>
             <br></br>
 
             <Grid container xs={12}>

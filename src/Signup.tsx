@@ -7,7 +7,7 @@ import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useEffect, useState } from 'react';
-import { Checkbox, FormControl, FormControlLabel, FormGroup, InputLabel, MenuItem, Select, SelectChangeEvent, Slider, Snackbar, TextField } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, AppBar, Grid, Stack, Tooltip, Checkbox, FormControl, FormControlLabel, FormGroup, InputLabel, MenuItem, Select, SelectChangeEvent, Slider, Snackbar, TextField } from '@mui/material';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -22,7 +22,7 @@ export default function Signup() {
   const [accessToken, setAccessToken] = useState('')
   const [activeStep, setActiveStep] = useState(0);
   const [skipped, setSkipped] = useState(new Set<number>());
-  const [data, setData] = useState({ name: "", email: "", phone: "", career: "", radius: "", address: "", start: new Date(), end: new Date(), capacity: ""})
+  const [data, setData] = useState({ name: "", email: "", phone: "", career: "", radius: "2", address: "", start: new Date(), end: new Date(), capacity: ""})
   const [days, setDays] = useState({ mon: false, tue: false, wed: false, thu: false, fri: false, sat: false, sun: false})
   const steps = ['Basic Details', 'Driver Availability'];
   const [fromOptions, setFromOptions] = useState<any>([]);
@@ -41,9 +41,9 @@ export default function Signup() {
 
   async function SaveData(isDriver : boolean){
 
-    const start = data.start.toString()
-    const end =  data.end.toString()
-
+    const start = format(data.start, 'p'); 
+    const end =  format(data.end, 'p'); 
+  
     var alldays = ""
 
     if (days.mon){ alldays += "Mon" } 
@@ -64,6 +64,7 @@ export default function Signup() {
         "address" : Address, 
         "radius": data.radius,
         "days": alldays,
+
         "outboundTime": start,
         "inboundTime": end,
         "capacity" : data.capacity, 
@@ -184,7 +185,8 @@ export default function Signup() {
         </>
       ) : (
         <>
-          <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
+          <Typography variant="h4" sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
+          <br></br>
           {activeStep === 0 ? 
 
             <Box
@@ -197,7 +199,7 @@ export default function Signup() {
                 borderRadius: 1,
                 }}
             >
-                <TextField style = {{marginBottom : 20}} id="outlined-basic" value={data.name} onChange={(e) => setData({...data, name : String(e.target.value)})} label="First Name" variant="outlined" />
+                <TextField style = {{marginBottom : 20}} id="outlined-basic" value={data.name} onChange={(e) => setData({...data, name : String(e.target.value)})} label="Full Name" variant="outlined" />
                 <TextField style = {{marginBottom : 20}} id="outlined-basic" value={data.email} onChange={(e) => setData({...data, email : String(e.target.value)})} label="Email" variant="outlined" />
                 <TextField style = {{marginBottom : 20}} id="outlined-basic" value={data.phone} onChange={(e) => setData({...data, phone : String(e.target.value)})} label="Phone Number" variant="outlined" />
 
@@ -220,35 +222,82 @@ export default function Signup() {
                         value={data.career} onChange={(e) => setData({...data, career : String(e.target.value)})} 
                         label="Career Stage"
                     >
-                    <MenuItem value={"PG"}>PG</MenuItem>
-                    <MenuItem value={"Staff"}>Staff</MenuItem>
+                    <MenuItem value={"PG(T) Students"}>PG(T) Students</MenuItem>
+                    <MenuItem value={"PG(R) Students"}>PG(R) Students</MenuItem>
                     <MenuItem value={"Lecturers"}>Lecturers</MenuItem>
+                    <MenuItem value={"Staff"}>Staff</MenuItem>
                     </Select>
                 </FormControl>
             </Box>
             : 
-            <>
-            <Typography> Days you will be travelling to university: </Typography>
-            <FormGroup>
-              <FormControlLabel  control={<Checkbox defaultChecked/>} label="Monday"  checked={days.mon} onChange={(e,v) => setDays({...days,mon: v})}/>
-              <FormControlLabel  control={<Checkbox defaultChecked />} label="Tuesday" checked={days.tue} onChange={(e,v) => setDays({...days,tue: v})}/>
-              <FormControlLabel  control={<Checkbox defaultChecked />} label="Wednesday" checked={days.wed} onChange={(e,v) => setDays({...days,wed: v})}/>
-              <FormControlLabel  control={<Checkbox defaultChecked />} label="Thursday" checked={days.thu} onChange={(e,v) => setDays({...days,thu: v})}/>
-              <FormControlLabel  control={<Checkbox defaultChecked />} label="Friday" checked={days.fri} onChange={(e,v) => setDays({...days,fri: v})}/>
-              <FormControlLabel  control={<Checkbox />} label="Saturday" checked={days.sat} onChange={(e,v) => setDays({...days,sat: v})}/>
-              <FormControlLabel  control={<Checkbox />} label="Sunday" checked={days.sun} onChange={(e,v) => setDays({...days,sun: v})}/>
-            </FormGroup>
+            <div style={{ paddingLeft : "30px"}}>
+            <Typography variant={"h6"} style={{ color : "#075c18" }}> Days you will be travelling to university: </Typography>
+                <br></br>
+                <div style={{ width : "500px"}}>
+                <Grid  item container direction="row" style={{  display : 'flex', alignItems : 'center', justifyContent : 'center'}}>
+                  <Grid item container direction="column" alignItems={'center'} xs={1} style={{   paddingTop : '2%', }}>
+                    <div style={{ textAlign : 'center'}}>
+                      <Typography style={{ paddingBottom : '10px'}}>Mon</Typography> 
+                      <Box m={0} style={{height : '5px', width: '100%', color : 'red', borderTop : '2px solid black' }}></Box>
+                      <Checkbox defaultChecked checked={days.mon} onChange={(e,v) => setDays({...days,mon: v})} />
+                    </div>
+                  </Grid>
+                  <Grid item container direction="column" alignItems={'center'} xs={1} style={{   paddingTop : '2%'}}>
+                  <div style={{ textAlign : 'center', paddingRight : '70%'}}>
+                  <Typography style={{ paddingBottom : '10px'}}>Tue</Typography> 
+                      <Box style={{height : '5px', width: '100%', color : 'red', borderTop : '2px solid black' }}></Box>
+                      <Checkbox defaultChecked  checked={days.tue} onChange={(e,v) => setDays({...days,tue: v})}/>
+                    </div>
+                  </Grid>
+                  <Grid item container direction="column" alignItems={'center'} xs={1} style={{   paddingTop : '2%'}}>
+                  <div style={{ textAlign : 'center'}}>
+                  <Typography style={{ paddingBottom : '10px'}}>Wed</Typography> 
+                      <Box style={{height : '5px', width: '100%', color : 'red', borderTop : '2px solid black' }}></Box>
+                      <Checkbox defaultChecked checked={days.wed} onChange={(e,v) => setDays({...days,wed: v})}/>
+                    </div>
+                  </Grid>
+                  <Grid item container direction="column" alignItems={'center'} xs={1} style={{   paddingTop : '2%'}}>
+                    <div style={{ textAlign : 'center'}}>
+                      <Typography style={{ paddingBottom : '10px'}}>Thu</Typography> 
+                      <Box style={{height : '5px', width: '100%', color : 'red', borderTop : '2px solid black' }}></Box>
+                      <Checkbox defaultChecked checked={days.thu} onChange={(e,v) => setDays({...days,thu: v})}/>
+                    </div>
+                  </Grid>
+                  <Grid item container direction="column" alignItems={'center'} xs={1} style={{   paddingTop : '2%'}}>
+                    <div style={{ textAlign : 'center'}}>
+                      <Typography style={{ paddingBottom : '10px'}}>Fri</Typography> 
+                      <Box style={{height : '5px', width: '100%', color : 'red', borderTop : '2px solid black' }}></Box>
+                      <Checkbox defaultChecked checked={days.fri} onChange={(e,v) => setDays({...days,fri: v})}/>
+                    </div>
+                  </Grid>
+                  <Grid item container direction="column" alignItems={'center'} xs={1} style={{   paddingTop : '2%'}}>
+                    <div style={{ textAlign : 'center'}}>
+                    <Typography style={{ paddingBottom : '10px'}}>Sat</Typography> 
+                    <Box style={{height : '5px', width: '100%', color : 'red', borderTop : '2px solid black' }}></Box>
+                    <Checkbox checked={days.sat} onChange={(e,v) => setDays({...days,sat: v})}/>
+                    </div>
+                  </Grid>
+                  <Grid item container direction="column" alignItems={'center'} xs={1} style={{   paddingTop : '2%'}}>
+                    <div style={{ textAlign : 'center', paddingRight : ''}}>
+                      <Typography style={{ paddingBottom : '10px'}}>Sun</Typography> 
+                      <Box style={{height : '5px', width: '100%', color : 'red', borderTop : '2px solid black' }}></Box>
+                      <Checkbox checked={days.sun} onChange={(e,v) => setDays({...days,sun: v})}/>
+                    </div>
+                  </Grid>
+                </Grid>
+                <br></br>
+                </div>
 
-
-            <Typography>
+            <Typography variant={"h6"} style={{ color : "#075c18" }}>
               Seat capacity available in the car that you are happy for passengers to use:  
             </Typography>
+            <br/>
 
             <TextField style = {{marginBottom : 20}} id="outlined-basic" value={data.capacity} onChange={(e) => setData({...data, capacity : String(e.target.value)})} 
                     label="Capacity" variant="outlined" />
 
-            <Typography>
-              Timing that you will arrive to and from the univeristy:  
+            <Typography variant={"h6"}  style={{ color : "#075c18" }}>
+              Timing that you will arrive to and from the university:  
             </Typography>
 
               <Box
@@ -285,8 +334,8 @@ export default function Signup() {
 
             </Box>
 
-            <Box sx={{ width: 300 }}>
-             <Typography>Radius willing to travel to pick up another passenger</Typography>
+            <Box sx={{ width: 300 }} style={{ color : "#075c18" }}>
+             <Typography variant={"h6"}  style={{ color : "#075c18" }} >Radius willing to travel to pick up another passenger</Typography>
               <Slider
                 aria-label="Temperature"
                 defaultValue={2}
@@ -299,7 +348,7 @@ export default function Signup() {
               />
             </Box>
 
-            </>
+            </div>
           }
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Button
