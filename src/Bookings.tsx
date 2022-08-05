@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
-import User from './model/User';
 import format from 'date-fns/format';
 import MakeBooking from './MakeBooking';
 import Grid from '@mui/material/Grid';
@@ -13,6 +12,7 @@ import { Box } from '@mui/material';
 import CalendarKey from './components/CalendarKey';
 import ResponsiveAppBar from './ResponsiveAppBar';
 import { useAuth0 } from '@auth0/auth0-react';
+import User from './model/User';
 
 
 function Bookings() {
@@ -136,6 +136,8 @@ function Bookings() {
         </Box>
         
         <CalendarKey/>
+        <br></br>
+        <br></br>
 
       </Grid>
       <Grid item lg={7}>

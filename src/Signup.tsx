@@ -64,7 +64,6 @@ export default function Signup() {
         "address" : Address, 
         "radius": data.radius,
         "days": alldays,
-
         "outboundTime": start,
         "inboundTime": end,
         "capacity" : data.capacity, 

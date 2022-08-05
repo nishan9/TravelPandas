@@ -5,6 +5,8 @@ import Dashboard from './Dashboard';
 import Content from './Content';
 import Bookings from './Bookings';
 import MyBookings from './MyBookings';
+import Profile from './Profile';
+import Savings from './Savings';
 
 function App() {
 
@@ -19,7 +21,9 @@ function App() {
             <Route path="/" element={<Content/>} />
             <Route path="/Dashboard" element={<Dashboard />} />
             <Route path="Dashboard/Bookings/:id" element={<Bookings />} />
+            <Route path="Profile" element={<Profile />} />
             <Route path="MyBookings" element={<MyBookings />} />
+            <Route path="Savings" element={<Savings />} />
           </Routes>
         </Router> 
         : 

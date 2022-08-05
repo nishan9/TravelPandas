@@ -1,6 +1,5 @@
 import { AppBar, Box, Card, Grid, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import Dashboard from './Dashboard'
 import ResponsiveAppBar from './ResponsiveAppBar'
 import NewBooking from './Images/newbooking.png'; 
 import User from './model/User'; 
@@ -37,36 +36,41 @@ function Menu() {
 
   return (
     <>
-    <ResponsiveAppBar/>
-    <br></br>
-    <div style={{ textAlign : 'center'}}>
-    <Typography variant='h3'> Holaaaaa { userInfo !== undefined ? userInfo.name : <></>} 🎉 </Typography>
-    </div>
-    <Grid container>
-      <Grid item xs={6} style={{ padding : '40px'}}>
-        <Card onClick={() => navigate('Dashboard')} style={{ cursor : 'pointer',padding : '20px', justifyContent : 'center', alignItems : 'center',  display : 'flex', flexDirection : 'column'}}> 
-          <img src={NewBooking} height={'180'}/> <Typography variant='h5'> Make a new Booking  </Typography>
-        </Card>
+      <ResponsiveAppBar/>
+      <br></br>
+      <div style={{ textAlign : 'center'}}>
+      <Typography variant='h3'> Holaaaaa { userInfo !== undefined ? userInfo.name : <></>} 🎉 </Typography>
+      </div>
+      <Grid container>
+        <Grid item xs={6} style={{ padding : '40px'}}>
+          <Card onClick={() => navigate('Dashboard')} style={{ cursor : 'pointer', padding : '20px', justifyContent : 'center', alignItems : 'center',  display : 'flex', flexDirection : 'column'}}>
+            <img src={NewBooking} height={'180'}/> 
+            <br></br>
+            <Typography variant='h5'> Make a new Booking  </Typography>
+          </Card>
+        </Grid>
+        <Grid item xs={6} style={{ padding : '40px'}}>
+        <Card onClick={() => navigate('Profile')} style={{ cursor : 'pointer', padding : '20px', justifyContent : 'center', alignItems : 'center',  display : 'flex', flexDirection : 'column'}}> 
+            <img src={UserPicture} height={'180'}/>
+            <br></br>
+            <Typography variant='h5'> User Profile  </Typography>
+          </Card>
+        </Grid>
+        <Grid item xs={6} style={{ padding : '40px'}}>
+        <Card onClick={() => navigate('Savings')} style={{  cursor : 'pointer', padding : '20px', justifyContent : 'center', alignItems : 'center',  display : 'flex', flexDirection : 'column'}}> 
+            <img src={Savings} height={'180'}/>
+            <br></br>
+            <Typography variant='h5'> My Savings </Typography>
+          </Card>
+        </Grid>
+        <Grid item xs={6} style={{ padding : '40px'}}>
+        <Card onClick={() => navigate('MyBookings')} style={{ cursor : 'pointer', padding : '20px', justifyContent : 'center', alignItems : 'center',  display : 'flex', flexDirection : 'column'}}> 
+            <img src={Bookings} height={'180'}/>
+            <br></br>
+            <Typography variant='h5'> My Bookings </Typography>
+          </Card>
+        </Grid>
       </Grid>
-      <Grid item xs={6} style={{ padding : '40px'}}>
-      <Card style={{ padding : '20px', justifyContent : 'center', alignItems : 'center',  display : 'flex', flexDirection : 'column'}}> 
-        <img src={UserPicture} height={'180'}/>
-          <Typography variant='h5'> User Profile  </Typography>
-        </Card>
-      </Grid>
-      <Grid item xs={6} style={{ padding : '40px'}}>
-      <Card style={{ padding : '20px', justifyContent : 'center', alignItems : 'center',  display : 'flex', flexDirection : 'column'}}> 
-        <img src={Savings} height={'180'}/>
-          <Typography variant='h5'> My Savings </Typography>
-        </Card>
-      </Grid>
-      <Grid item xs={6} style={{ padding : '40px'}}>
-      <Card onClick={() => navigate('MyBookings')} style={{ cursor : 'pointer', padding : '20px', justifyContent : 'center', alignItems : 'center',  display : 'flex', flexDirection : 'column'}}> 
-        <img src={Bookings} height={'180'}/>
-          <Typography variant='h5'> My Bookings </Typography>
-        </Card>
-      </Grid>
-    </Grid>
     </>
   )
   
